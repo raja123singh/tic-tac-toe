@@ -1,96 +1,48 @@
 import React, { useState } from 'react';
 
-const PlayerSetup = ({ onCreateRoom, onJoinRoom }) => {
-  const [mode, setMode] = useState('create'); // 'create' or 'join'
-  const [playerName, setPlayerName] = useState('');
-  const [roomId, setRoomId] = useState('');
+const PlayerSetup = ({ onStart }) => {
+  const [player1, setPlayer1] = useState('');
+  const [player2, setPlayer2] = useState('');
 
-  const handleCreate = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const name = playerName.trim() || 'Player 1';
-    onCreateRoom(name);
-  };
-
-  const handleJoin = (e) => {
-    e.preventDefault();
-    const name = playerName.trim() || 'Player 2';
-    if (!roomId.trim()) {
-      alert("Please enter a Room ID");
-      return;
-    }
-    onJoinRoom(name, roomId.trim());
+    const p1 = player1.trim() || 'Player 1';
+    const p2 = player2.trim() || 'Player 2';
+    onStart(p1, p2);
   };
 
   return (
     <div className="setup-container">
-      <div className="setup-tabs">
-        <button 
-          type="button"
-          className={`tab-btn ${mode === 'create' ? 'active' : ''}`}
-          onClick={() => setMode('create')}
-        >
-          Create Room
+      <h2 className="setup-title">Enter Player Names</h2>
+      <form onSubmit={handleSubmit} className="setup-form">
+        <div className="input-group">
+          <label htmlFor="player1">Player 1 (X)</label>
+          <input
+            id="player1"
+            type="text"
+            placeholder="Name for X"
+            value={player1}
+            onChange={(e) => setPlayer1(e.target.value)}
+            className="player-input x-input"
+            maxLength={15}
+          />
+        </div>
+        <div className="input-group">
+          <label htmlFor="player2">Player 2 (O)</label>
+          <input
+            id="player2"
+            type="text"
+            placeholder="Name for O"
+            value={player2}
+            onChange={(e) => setPlayer2(e.target.value)}
+            className="player-input o-input"
+            maxLength={15}
+          />
+        </div>
+        <button type="submit" className="start-button">
+          Start Game
         </button>
-        <button 
-          type="button"
-          className={`tab-btn ${mode === 'join' ? 'active' : ''}`}
-          onClick={() => setMode('join')}
-        >
-          Join Room
-        </button>
-      </div>
-
-      {mode === 'create' ? (
-        <form onSubmit={handleCreate} className="setup-form">
-          <h2 className="setup-title">Host a New Game</h2>
-          <div className="input-group">
-            <label htmlFor="playerName">Your Name</label>
-            <input
-              id="playerName"
-              type="text"
-              placeholder="Enter your name"
-              value={playerName}
-              onChange={(e) => setPlayerName(e.target.value)}
-              className="player-input x-input"
-              maxLength={15}
-            />
-          </div>
-          <button type="submit" className="start-button">
-            Create Room
-          </button>
-        </form>
-      ) : (
-        <form onSubmit={handleJoin} className="setup-form">
-          <h2 className="setup-title">Join Existing Game</h2>
-          <div className="input-group">
-            <label htmlFor="playerName">Your Name</label>
-            <input
-              id="playerName"
-              type="text"
-              placeholder="Enter your name"
-              value={playerName}
-              onChange={(e) => setPlayerName(e.target.value)}
-              className="player-input o-input"
-              maxLength={15}
-            />
-          </div>
-          <div className="input-group">
-            <label htmlFor="roomId">Room ID</label>
-            <input
-              id="roomId"
-              type="text"
-              placeholder="Enter Room ID"
-              value={roomId}
-              onChange={(e) => setRoomId(e.target.value.toUpperCase())}
-              className="player-input"
-              maxLength={10}
-            />
-          </div>
-          <button type="submit" className="start-button join-btn">
-            Join Game
-          </button>
-        </form>
-      )}
+      </form>
     </div>
   );
 };
