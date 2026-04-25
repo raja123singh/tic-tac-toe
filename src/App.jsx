@@ -56,9 +56,17 @@ function App() {
     setXIsNext(!xIsNext);
   };
 
+  // Resets only the board for the next round (keeps scores)
   const resetGame = () => {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
+  };
+
+  // Resets the board and the scores to 0 (keeps names)
+  const restartMatch = () => {
+    setSquares(Array(9).fill(null));
+    setXIsNext(true);
+    setScores({ X: 0, O: 0 });
   };
 
   const handleStartGame = (p1, p2) => {
@@ -132,8 +140,11 @@ function App() {
             <Board squares={squares} onClick={handleClick} />
 
             <div className="action-buttons">
-              <button className="reset-button" onClick={resetGame}>
-                Reset Game
+              <button className="reset-button" onClick={resetGame} title="Keep scores, start next round">
+                Next Round (Reset Board)
+              </button>
+              <button className="restart-button" onClick={restartMatch} title="Reset scores to 0">
+                Restart Match
               </button>
             </div>
           </>

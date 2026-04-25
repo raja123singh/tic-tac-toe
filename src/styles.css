@@ -204,8 +204,28 @@ body {
 .action-buttons {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 15px;
   margin-top: 10px;
+}
+
+.restart-button {
+  background: #f39c12;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+}
+
+.restart-button:hover {
+  background: #d68910;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(243, 156, 18, 0.6);
 }
 
 .exit-top-button {
