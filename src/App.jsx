@@ -89,6 +89,16 @@ function App() {
 
   return (
     <div className="app-container">
+      {gameStarted && (
+        <button 
+          className="exit-top-button" 
+          onClick={handleExitGame}
+          aria-label="Exit Game"
+          title="Exit Game"
+        >
+          ✕ Exit
+        </button>
+      )}
       <button 
         className="theme-toggle" 
         onClick={() => setIsDarkMode(!isDarkMode)}
@@ -123,10 +133,7 @@ function App() {
 
             <div className="action-buttons">
               <button className="reset-button" onClick={resetGame}>
-                Restart Game
-              </button>
-              <button className="exit-button" onClick={handleExitGame}>
-                Exit Game
+                Reset Game
               </button>
             </div>
           </>
