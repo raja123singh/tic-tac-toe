@@ -24,7 +24,7 @@ function App() {
   const [xIsNext, setXIsNext] = useState(true);
   const [scores, setScores] = useState({ X: 0, O: 0 });
   const [isDarkMode, setIsDarkMode] = useState(true);
-  
+
   const [gameStarted, setGameStarted] = useState(false);
   const [player1Name, setPlayer1Name] = useState('Player 1');
   const [player2Name, setPlayer2Name] = useState('Player 2');
@@ -51,7 +51,7 @@ function App() {
 
     const nextSquares = squares.slice();
     nextSquares[i] = xIsNext ? 'X' : 'O';
-    
+
     setSquares(nextSquares);
     setXIsNext(!xIsNext);
   };
@@ -98,8 +98,8 @@ function App() {
   return (
     <div className="app-container">
       {gameStarted && (
-        <button 
-          className="exit-top-button" 
+        <button
+          className="exit-top-button"
           onClick={handleExitGame}
           aria-label="Exit Game"
           title="Exit Game"
@@ -107,8 +107,8 @@ function App() {
           ✕ Exit
         </button>
       )}
-      <button 
-        className="theme-toggle" 
+      <button
+        className="theme-toggle"
         onClick={() => setIsDarkMode(!isDarkMode)}
         aria-label="Toggle Dark Mode"
       >
@@ -117,7 +117,7 @@ function App() {
 
       <div className="game-card">
         <h1 className="title">Tic Tac Toe</h1>
-        
+
         {!gameStarted ? (
           <PlayerSetup onStart={handleStartGame} />
         ) : (
@@ -141,7 +141,7 @@ function App() {
 
             <div className="action-buttons">
               <button className="reset-button" onClick={resetGame} title="Keep scores, start next round">
-                Next Round (Reset Board)
+                Next Round
               </button>
               <button className="restart-button" onClick={restartMatch} title="Reset scores to 0">
                 Restart Match
