@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Board from './components/Board';
+import PlayerSetup from './components/PlayerSetup';
 import { playClickSound, playWinSound } from './utils/audio';
 import './styles.css';
 
@@ -23,6 +24,10 @@ function App() {
   const [xIsNext, setXIsNext] = useState(true);
   const [scores, setScores] = useState({ X: 0, O: 0 });
   const [isDarkMode, setIsDarkMode] = useState(true);
+  
+  const [gameStarted, setGameStarted] = useState(false);
+  const [player1Name, setPlayer1Name] = useState('Player 1');
+  const [player2Name, setPlayer2Name] = useState('Player 2');
 
   // Apply theme to body
   useEffect(() => {
@@ -56,13 +61,30 @@ function App() {
     setXIsNext(true);
   };
 
+  const handleStartGame = (p1, p2) => {
+    setPlayer1Name(p1);
+    setPlayer2Name(p2);
+    setGameStarted(true);
+  };
+
+  const handleExitGame = () => {
+    setGameStarted(false);
+    setSquares(Array(9).fill(null));
+    setXIsNext(true);
+    setScores({ X: 0, O: 0 });
+    setPlayer1Name('Player 1');
+    setPlayer2Name('Player 2');
+  };
+
   let status;
   if (winner) {
-    status = `Winner: ${winner}`;
+    const winnerName = winner === 'X' ? player1Name : player2Name;
+    status = `${winnerName} (${winner}) Wins 🎉`;
   } else if (isDraw) {
-    status = 'Draw!';
+    status = 'Match Draw!';
   } else {
-    status = `Next player: ${xIsNext ? 'X' : 'O'}`;
+    const currentPlayerName = xIsNext ? player1Name : player2Name;
+    status = `${currentPlayerName} (${xIsNext ? 'X' : 'O'})'s turn`;
   }
 
   return (
@@ -78,26 +100,37 @@ function App() {
       <div className="game-card">
         <h1 className="title">Tic Tac Toe</h1>
         
-        <div className="scoreboard">
-          <div className="score-badge x-score">
-            <span>X Wins</span>
-            <strong>{scores.X}</strong>
-          </div>
-          <div className="score-badge o-score">
-            <span>O Wins</span>
-            <strong>{scores.O}</strong>
-          </div>
-        </div>
+        {!gameStarted ? (
+          <PlayerSetup onStart={handleStartGame} />
+        ) : (
+          <>
+            <div className="scoreboard">
+              <div className="score-badge x-score">
+                <span>{player1Name} (X)</span>
+                <strong>{scores.X}</strong>
+              </div>
+              <div className="score-badge o-score">
+                <span>{player2Name} (O)</span>
+                <strong>{scores.O}</strong>
+              </div>
+            </div>
 
-        <div className="status-indicator">
-          {status}
-        </div>
+            <div className="status-indicator">
+              {status}
+            </div>
 
-        <Board squares={squares} onClick={handleClick} />
+            <Board squares={squares} onClick={handleClick} />
 
-        <button className="reset-button" onClick={resetGame}>
-          Restart Game
-        </button>
+            <div className="action-buttons">
+              <button className="reset-button" onClick={resetGame}>
+                Restart Game
+              </button>
+              <button className="exit-button" onClick={handleExitGame}>
+                Exit Game
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

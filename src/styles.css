@@ -200,3 +200,112 @@ body {
   .game-card { padding: 20px; }
   .title { font-size: 2rem; }
 }
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.exit-button {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+}
+
+.exit-button:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6);
+}
+
+.setup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.setup-title {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: var(--text-color);
+}
+
+.setup-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 8px;
+}
+
+.input-group label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  opacity: 0.9;
+}
+
+.player-input {
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 2px solid var(--square-border);
+  background: var(--square-bg);
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: all 0.3s;
+  font-family: inherit;
+  width: 100%;
+}
+
+.player-input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.x-input:focus {
+  border-color: var(--x-color);
+  box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.2);
+}
+
+.o-input:focus {
+  border-color: var(--o-color);
+  box-shadow: 0 0 0 3px rgba(46, 213, 115, 0.2);
+}
+
+.start-button {
+  background: #2ecc71;
+  color: white;
+  border: none;
+  padding: 14px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+  width: 100%;
+}
+
+.start-button:hover {
+  background: #27ae60;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 204, 113, 0.6);
+}
